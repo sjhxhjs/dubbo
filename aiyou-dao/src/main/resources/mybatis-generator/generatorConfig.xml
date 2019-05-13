@@ -1,3 +1,4 @@
+<!--
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
@@ -16,37 +17,37 @@
                         connectionURL="jdbc:mysql://localhost:3306/aiyoudb" userId="root"
                         password="763152431"/>
 
-        <!--实体类-->
+        &lt;!&ndash;实体类&ndash;&gt;
         <javaModelGenerator targetPackage="com.aiyou.entity"
                             targetProject="/home/songjianhua/project/testdubbo/aiyou-pojo/src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!--mapper.xml-->
+        &lt;!&ndash;mapper.xml&ndash;&gt;
         <sqlMapGenerator targetPackage="com.aiyou.mapper"
                          targetProject="/home/songjianhua/project/testdubbo/aiyou-dao/src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <!--dao-->
+        &lt;!&ndash;dao&ndash;&gt;
         <javaClientGenerator targetPackage="com.aiyou.mapper"
                              targetProject="/home/songjianhua/project/testdubbo/aiyou-dao/src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill"
+        &lt;!&ndash;<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>-->
+               selectByExampleQueryId="false"/>&ndash;&gt;
 
         <table tableName="tb_user" domainObjectName="User"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
-            <!--<columnRenamingRule searchString="^D_"
-                                replaceString=""/>-->
+            &lt;!&ndash;<columnRenamingRule searchString="^D_"
+                                replaceString=""/>&ndash;&gt;
         </table>
 
     </context>
-</generatorConfiguration>
+</generatorConfiguration>-->
