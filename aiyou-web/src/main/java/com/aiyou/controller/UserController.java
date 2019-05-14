@@ -4,10 +4,9 @@ import com.aiyou.domain.Result;
 import com.aiyou.entity.User;
 import com.aiyou.service.UserService;
 import com.alibaba.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author abird
@@ -29,6 +28,28 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, "注册失败");
+        }
+    }
+
+    @RequestMapping(value = "/getUserInfo",method = RequestMethod.GET)
+    public Result getUserInfo() {
+        try {
+            List<User> list = userService.getUserInfo();
+            return new Result(true, "查询成功",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, "查询失败");
+        }
+    }
+
+    @RequestMapping(value = "/getUserInfoByname",method = RequestMethod.GET)
+    public Result getUserInfoByname(@RequestParam("username") String username) {
+        try {
+            List<User> list = userService.getUserInfoByName(username);
+            return new Result(true, "查询成功",list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, "查询失败");
         }
     }
 }

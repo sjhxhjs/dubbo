@@ -2,6 +2,8 @@ package com.aiyou.service;
 
 import com.aiyou.entity.User;
 
+import java.util.List;
+
 /**
  * @author abird
  * @date:2019-05-13
@@ -9,4 +11,8 @@ import com.aiyou.entity.User;
  */
 public interface UserService {
     public void regist(User user);
+
+    public List<User> getUserInfo();
+
+    public List<User> getUserInfoByName(String username);
 }
