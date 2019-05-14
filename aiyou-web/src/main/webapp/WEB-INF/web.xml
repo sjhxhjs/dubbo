@@ -35,7 +35,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
-    <url-pattern>*.action</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>
 
   <!-- 地址为http://localhost:8080/  显示的默认网页-->
