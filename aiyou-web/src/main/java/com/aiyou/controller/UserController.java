@@ -4,6 +4,8 @@ import com.aiyou.domain.Result;
 import com.aiyou.entity.User;
 import com.aiyou.service.UserService;
 import com.alibaba.dubbo.config.annotation.Reference;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    private static Log logger = LogFactory.getLog(UserController.class);
 
     @Reference
     private UserService userService;
@@ -46,9 +50,11 @@ public class UserController {
     public Result getUserInfoByname(@RequestParam("username") String username) {
         try {
             List<User> list = userService.getUserInfoByName(username);
+            logger.info("按名称模糊查询成功");
             return new Result(true, "查询成功",list);
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error("按名称模糊查询失败");
             return new Result(false, "查询失败");
         }
     }

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <property name="LOG_HOME" value="/home/songjianhua/project/logs/testdubbo"/>
+    <property name="COMPONENT_ID" value="aiyou"/>
+    <property name="SEGMENT_ID" value="aiyou"/>
+    <!-- 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %level [%thread] [%logger{50}:%line] %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 业务日志 -->
+    <!-- 操作日志Appender, -->
+    <!--<appender name="BUS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/${COMPONENT_ID}.${SEGMENT_ID}.business.log</File>
+        <rollingPolicy class="logback.rolling.log.gather.TimeBasedBackUpRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${COMPONENT_ID}.${SEGMENT_ID}.business.log.%i.zip</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            &lt;!&ndash;最多十个文件 &ndash;&gt;
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>25MB</MaxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} - %msg%n</pattern>
+       </encoder>
+    </appender>-->
+
+
+    <!-- 操作日志Appender,   结束 -->
+
+    <!-- 埋点库日志 -->
+    <!-- 追踪日志Appender -->
+    <!--<appender name="DTS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_HOME}/${COMPONENT_ID}.${SEGMENT_ID}.dts.log</File>
+        <rollingPolicy class="logback.rolling.log.gather.TimeBasedBackUpRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${COMPONENT_ID}.${SEGMENT_ID}.dts.log.%i.zip</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>25MB</MaxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSSXXX} %-5level ${MODEL_NAME} [%thread] [%logger{50}.%method: %line] - %msg%n</Pattern>
+       </encoder>
+    </appender>-->
+    <!-- 追踪日志Appender,  结束 -->
+
+    <!-- DEBUG日志 (文件最大100M，最多10个) -->
+    <appender name="FILE-debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <File>/home/songjianhua/project/logs/testdubbo/debug.log</File>
+        <!--logback.rolling.log.gather.TimeBasedBackUpRollingPolicy-->
+        <!--<rollingPolicy class="logback.">
+            <FileNamePattern>/home/songjianhua/project/logs/testdubbo/debug.log.%i.tar.gz
+            </FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <FileNamePattern>/home/songjianhua/project/logs/testdubbo/debug.log.%i.gz
+            </FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>1</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <!-- debug文件大小设置为100M, 再压缩 -->
+            <MaxFileSize>1MB</MaxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %level [%thread] [%logger{50}:%line] %msg%n%ex</Pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        　　　　
+        <file>/home/songjianhua/project/logs/testdubbo/testFile.log</file>
+        　　　　
+        <append>true</append>
+        　　　　
+        <encoder>
+            　　　　　　
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+            　　　　
+        </encoder>
+        　　
+    </appender>
+
+    <!-- ERROR日志 (文件最大25M，最多10个) -->
+    <!--<appender name="FILE-error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <File>${LOG_HOME}/${COMPONENT_ID}.${SEGMENT_ID}.error.log</File>
+        <rollingPolicy class="logback.rolling.log.gather.TimeBasedBackUpRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${COMPONENT_ID}.${SEGMENT_ID}.error.log.%i.zip
+            </FileNamePattern>
+            <MinIndex>1</MinIndex>
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>25MB</MaxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %level ${COMPONENT_ID}.${SEGMENT_ID} [%thread] [%logger{50}:%line] %msg%n%ex</Pattern>
+       </encoder>
+    </appender>-->
+
+
+    <!-- SPRING等框架类代码日志打印, 输出到OTHER文件中, 出厂默认WARN以上 -->
+    <!--<appender name="OTHER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+        <File>${LOG_HOME}/${COMPONENT_ID}.${SEGMENT_ID}.other.log</File>
+        <rollingPolicy class="logback.rolling.log.gather.TimeBasedBackUpRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/${COMPONENT_ID}.${SEGMENT_ID}.other.%i.log.zip</FileNamePattern>
+            <MinIndex>1</MinIndex>
+            &lt;!&ndash;最多十个文件 &ndash;&gt;
+            <MaxIndex>10</MaxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>25MB</MaxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %level ${COMPONENT_ID}.${SEGMENT_ID} [%thread] [%logger{50}:%line] - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>-->
+
+
+    <!-- 业务日志级别 -->
+    <!--<logger name="HikBusLog" level="INFO" additivity="false">
+        <appender-ref ref="BUS" />
+        <appender-ref ref="STDOUT" />
+    </logger>-->
+    <!-- ef框架sql默认是INFO级别, 打印级别改成WARN, 防止sql频繁打印 -->
+    <!--<logger name="GeeQuery" level="DEBUG"></logger>-->
+
+    <!-- 项目中有其他重要程度不高、打印频繁的日志来源,按下面方式配置高级别 -->
+    <!--<logger name="com.hikvision.swdf.impl.TraceRecordGenerator" level="INFO" additivity="false">
+        <appender-ref ref="DTS" />
+        <appender-ref ref="STDOUT" />
+    </logger>-->
+
+    <!--<logger name="org.apache" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="OTHER"/>
+    </logger>
+
+
+    <logger name="com.hikvision.sso" level="ERROR" additivity="false">
+        <appender-ref ref="OTHER" />
+    </logger>
+
+    <logger name="org.mybatis" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="OTHER" />
+    </logger>
+
+    <logger name="com.hikvision.notify" level="ERROR" additivity="false">
+        <appender-ref ref="OTHER" />
+    </logger>
+
+    <logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="ERROR" additivity="false">
+        <appender-ref ref="FILE-error" />
+    </logger>-->
+
+
+    <!--<logger name="com.aiyou.mapper" level="DEBUG" additivity="false">
+    	&lt;!&ndash; 控制台打印sql,不会记录到日志文件中,本地调试建议开启debug模式&ndash;&gt;
+        <appender-ref ref="STDOUT" />
+    </logger>-->
+
+    <!-- 便于开启访客组件自己的日志 ，通用日志全部采用ERROR级别,查问题用info-->
+    <!--<logger name="com.hikvision.cms.visitor" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE-debug" />
+        <appender-ref ref="FILE-error" />
+    </logger>-->
+
+    <logger name="org.springframework" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <!-- 出厂默认输出级别INFO, 排查问题时, 可以通过工具切换为TRACE -->
+    <!-- 自定义模块日志打印 添加在后面 -->
+    <logger name="com.aiyou" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="FILE-debug"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="FILE-debug"/>
+    </root>
+</configuration>
